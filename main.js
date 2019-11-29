@@ -4,10 +4,14 @@
 // BONUS: generare la griglia dei quadratini utilizzando jQuery
 // Nome repo: js-jq-grigliaquadrati
 // -----------------------------------------------------------------------------
-var side = 8;
+var side = 8; // lato griglia
+var fleetSize = 15; // numero navi da piazzare
+var gridSize = side * side; // dimensione griglia, numero di elementi di cui è composta
 
 // creo la griglia di (side x side) elementi
-createGrid(side);
+createGrid();
+
+putBoatOnGrid(fleetSize);
 
 // intercetto click su una cella
 $('.cell').click(function() {
@@ -17,22 +21,58 @@ $('.cell').click(function() {
 
 });
 
-function createGrid(size) {
-    // ricevo in ingresso la dimensione del lato della griglia da creare
-    // popolo grid-container di "size" righe fatte di "size" elementi
 
-    var HTMLelement = '<span class="cell"></span>'; // codice HTML da inserire in pagina
+function createGrid() {
+    // creo una griglia di "side" righe ognuna delle quali ha "side" elementi
+    // cioè un quadrato di "gridSize" elementi
 
-    for (var i = 0; i < (size * size); i++) {
+    var HTMLelement = '<span class="cell"></span>'; // codice HTML da ripetere in pagina
+
+    // ciclo per "gridSize" volte e aggiungo ogni volta il mio elemnto HTML
+    for (var i = 0; i < gridSize; i++) {
         $('.grid-container').append(HTMLelement);
     }
-
 }
 
 
+function putBoatOnGrid() {
+
+    var boatPositions = []; // array che mi conterrà le posizioni  dove inserirò le navi in griglia
+
+    // chiano una funzione che mi restituisce un array contenente de posizioni delle navi in griglia
+    boatPositions = generateBoatPositions();
+    console.log("boatPositions:", boatPositions);
+
+    // scorro la mia struttura griglia
+    $('.cell').each(function(position) {
+        // sfrutto l'indice che mi mette a disposizione la each() per saper dove mettere le navi
+        // cioè su quali elementi HTML aggiungere la classe "boat", l'indice lo chiamo position
+
+        if (boatPositions.includes(position)) {
+            // sono arrivato su di un elemento (span) HTML dove devo piazzare la nave
+            $(this).addClass('boat');
+        }
+    });
+}
 
 
+function generateBoatPositions() {
 
+    var boatPositionsArray = []; // array che deve contenere le posizioni calcolate randomicamente
+    var posCounter = 0; // contatore di posizioni inserite
+
+    while (posCounter < fleetSize) {
+        // ciclo finchè non ho generato "fleetSize" posizioni diverse tra loro
+
+        randomPos = getRandom(0, gridSize - 1);
+        if (!boatPositionsArray.includes(randomPos)) {
+            boatPositionsArray[posCounter] = randomPos;
+            posCounter++;
+        }
+    }
+
+    return boatPositionsArray;
+}
 
 
 function setColor(cell) {
@@ -46,7 +86,6 @@ function setColor(cell) {
         $(cell).addClass('green');
     }
 }
-
 
 
 function getRandom(min, max) {
