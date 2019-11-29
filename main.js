@@ -11,7 +11,7 @@ var gridSize = side * side; // dimensione griglia, numero di elementi di cui è 
 // creo la griglia di (side x side) elementi
 createGrid();
 
-putBoatOnGrid(fleetSize);
+putBoatOnGrid();
 
 // intercetto click su una cella
 $('.cell').click(function() {
@@ -21,7 +21,7 @@ $('.cell').click(function() {
 
 });
 
-
+// ---------------------------- FUNCTIONs --------------------------------------
 function createGrid() {
     // creo una griglia di "side" righe ognuna delle quali ha "side" elementi
     // cioè un quadrato di "gridSize" elementi
@@ -41,12 +41,11 @@ function putBoatOnGrid() {
 
     // chiano una funzione che mi restituisce un array contenente de posizioni delle navi in griglia
     boatPositions = generateBoatPositions();
-    console.log("boatPositions:", boatPositions);
 
     // scorro la mia struttura griglia
-    $('.cell').each(function(position) {
-        // sfrutto l'indice che mi mette a disposizione la each() per saper dove mettere le navi
-        // cioè su quali elementi HTML aggiungere la classe "boat", l'indice lo chiamo position
+    // sfrutto l'indice che mi mette a disposizione la each() per saper dove mettere le navi
+    // cioè su quali elementi HTML aggiungere la classe "boat", l'indice lo chiamo position
+    $('.grid-container .cell').each(function(position) {
 
         if (boatPositions.includes(position)) {
             // sono arrivato su di un elemento (span) HTML dove devo piazzare la nave
