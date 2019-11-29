@@ -8,14 +8,19 @@
 // intercetto click su una cella
 $('.cell').click(function() {
 
+    setColor($(this));
+
+});
+
+
+function setColor(cell) {
     //aggiorno colore cella, se ha classe boat diventa rossa, altrimenti diventa verde
     // in $(this) ho il riferimento all'elemento appena cliccato
-    if ($(this).hasClass('boat')) {
+    if ($(cell).hasClass('boat')) {
         // con la classe red cambio il background-color
-        $(this).addClass('red')
+        $(cell).addClass('red');
     } else {
         // con la classe green cambio il background-color
-        $(this).addClass('green')
+        $(cell).addClass('green');
     }
-
-})
+}
