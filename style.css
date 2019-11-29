@@ -20,11 +20,19 @@
     margin: 0 auto;
 }
 
-.grid-container {}
+.grid-container {
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    width: 322px;
+    height: 322px;
+}
 
 .cell {
     border: 1px solid black;
-    display: inline-block;
+    /* display: inline-block; */
+    flex-shrink: 0;
     width: 40px;
     height: 40px;
     background-color: white;
