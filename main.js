@@ -11,12 +11,14 @@ var gridSize = side * side; // dimensione griglia, numero di elementi di cui è 
 // creo la griglia di (side x side) elementi
 createGrid();
 
+// inserisco le navi nelle posizioni generate a caso
 putBoatOnGrid();
 
 // intercetto click su una cella
 $('.cell').click(function() {
 
     // passo alla funzione il riferimento all'elemento su cui ho intercettato il click
+    // coloro la cella a seconda che ci sia o meno una nave
     setColor($(this));
 
 });
@@ -30,6 +32,7 @@ function createGrid() {
 
     // ciclo per "gridSize" volte e aggiungo ogni volta il mio elemnto HTML
     for (var i = 0; i < gridSize; i++) {
+        // appendo, quindi aggiungo in coda, senza sovrascriver
         $('.grid-container').append(HTMLelement);
     }
 }
@@ -37,9 +40,9 @@ function createGrid() {
 
 function putBoatOnGrid() {
 
-    var boatPositions = []; // array che mi conterrà le posizioni  dove inserirò le navi in griglia
+    var boatPositions = []; // array che mi conterrà le posizioni dove inserirò le navi in griglia
 
-    // chiano una funzione che mi restituisce un array contenente de posizioni delle navi in griglia
+    // chiamo una funzione che mi restituisce un array contenente le posizioni dove piazzerò le navi
     boatPositions = generateBoatPositions();
 
     // scorro la mia struttura griglia
