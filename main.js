@@ -28,12 +28,12 @@ function createGrid() {
     // creo una griglia di "side" righe ognuna delle quali ha "side" elementi
     // cioè un quadrato di "gridSize" elementi
 
-    var HTMLelement = '<span class="cell"></span>'; // codice HTML da ripetere in pagina
+    var HTMLemptySpan = '<span class="cell"></span>'; // codice HTML da ripetere in pagina
 
     // ciclo per "gridSize" volte e aggiungo ogni volta il mio elemnto HTML
     for (var i = 0; i < gridSize; i++) {
-        // appendo, quindi aggiungo in coda, senza sovrascriver
-        $('.grid-container').append(HTMLelement);
+        // appendo, quindi aggiungo in coda, senza sovrascrivere
+        $('.grid-container').append(HTMLemptySpan);
     }
 }
 
@@ -73,6 +73,7 @@ function generateBoatPositions() {
         }
     }
 
+    // ritorno l'array valorizzato con le posizioni
     return boatPositionsArray;
 }
 
@@ -80,12 +81,17 @@ function generateBoatPositions() {
 function setColor(cell) {
     // aggiorno colore cella, se ha classe boat diventa rossa, altrimenti diventa verde
     // in cell ho il riferimento all'elemento appena cliccato
+    HTMLboatIcon = "<i class=\"fas fa-ship fa-2x\"></i>"; // icona nave
+    HTMLwaterIcon = "<i class=\"fas fa-water fa-2x\"></i>"; // icona mare
+
+
     if ($(cell).hasClass('boat')) {
-        // con la classe red cambio il background-color
-        $(cell).addClass('red');
+        $(cell).addClass('red'); // con la classe red cambio il background-color
+        $(cell).append(HTMLboatIcon); // aggiungo anche un'icona di una nave
+
     } else {
-        // con la classe green cambio il background-color
-        $(cell).addClass('green');
+        $(cell).addClass('green'); // con la classe green cambio il background-color
+        $(cell).append(HTMLwaterIcon); // aggiungo anche un'icona di una nave
     }
 }
 
