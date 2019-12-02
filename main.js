@@ -61,15 +61,13 @@ function putBoatOnGrid() {
 function generateBoatPositions() {
 
     var boatPositionsArray = []; // array che deve contenere le posizioni calcolate randomicamente
-    var posCounter = 0; // contatore di posizioni inserite
 
-    while (posCounter < fleetSize) {
+    while (boatPositionsArray.length < fleetSize) {
         // ciclo finchè non ho generato "fleetSize" posizioni diverse tra loro
 
         randomPos = getRandom(0, gridSize - 1);
         if (!boatPositionsArray.includes(randomPos)) {
-            boatPositionsArray[posCounter] = randomPos;
-            posCounter++;
+            boatPositionsArray.push(randomPos);
         }
     }
 
